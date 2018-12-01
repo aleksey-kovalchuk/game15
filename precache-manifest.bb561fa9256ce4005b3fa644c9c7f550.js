@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "1e30d20cc07c4241755d",
+    "revision": "cc05c6f4d3f43d510037",
     "url": "/game15/static/css/main.1aa0128c.chunk.css"
   },
   {
-    "revision": "1e30d20cc07c4241755d",
-    "url": "/game15/static/js/main.1e30d20c.chunk.js"
+    "revision": "cc05c6f4d3f43d510037",
+    "url": "/game15/static/js/main.cc05c6f4.chunk.js"
   },
   {
     "revision": "4cd17c70348584811180",
@@ -20,15 +20,15 @@ self.__precacheManifest = [
     "url": "/game15/static/js/runtime~main.f1a4bd46.js"
   },
   {
-    "revision": "f0816eb570871862b69aec8a77150f27",
-    "url": "/game15/static/media/gloria-hallelujah-latin-400.f0816eb5.woff"
-  },
-  {
     "revision": "403e8e9a007d9700f935b16b9e34bd35",
     "url": "/game15/static/media/gloria-hallelujah-latin-400.403e8e9a.woff2"
   },
   {
-    "revision": "792a2e91df4d17f900432bf65b16f0fd",
+    "revision": "f0816eb570871862b69aec8a77150f27",
+    "url": "/game15/static/media/gloria-hallelujah-latin-400.f0816eb5.woff"
+  },
+  {
+    "revision": "73b283909ec7e0983cfb665c2ad2ee93",
     "url": "/game15/index.html"
   }
 ];
