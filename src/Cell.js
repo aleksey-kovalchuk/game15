@@ -1,11 +1,13 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Cell = styled.div`
+  font-size: 22px;
   transition: all 0.1s ease-in;
   border-radius: 4px;
   background: #ffffff;
-  border: 1px solid red;
+  border: 2px solid #333333;
   box-sizing: border-box;
   position: absolute;
   cursor: pointer;
@@ -17,7 +19,7 @@ const Cell = styled.div`
   }
 `;
 
-export default function (props) {
+const CellComponent = (props) => {
   return (
     <Fragment>
       {
@@ -34,3 +36,13 @@ export default function (props) {
     </Fragment>
   );
 }
+
+CellComponent.propTypes = {
+  top: PropTypes.number,
+  left: PropTypes.number,
+  size: PropTypes.number,
+  number: PropTypes.number,
+  clicked: PropTypes.func
+};
+
+export default CellComponent;
