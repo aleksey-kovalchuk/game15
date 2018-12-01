@@ -48,6 +48,8 @@ const Title = styled.div`
   text-align: center;
   font-size: 40px;
   padding: 15px 0 20px 0;
+  display: inline-block;
+  margin: 0 auto;
 `;
 
 
