@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { moveCell, resetGame, moveBack, saveCells, restoreCells } from '../actions';
+import {
+  moveCell,
+  resetGame,
+  moveBack,
+  saveCells,
+  restoreCells,
+  setSize
+} from '../actions';
 import Cell from '../components/Cell';
 import WinnerModal from '../components/WinnerModal'
 
@@ -18,7 +25,7 @@ const GameBox = styled.div`
   background: #333333;
   border-radius: 4px;
   box-shadow: 0 0 30px rgba(0,0,0,0.6);
-  margin-bottom: 20px;
+  margin: 0 auto 20px auto;
 `;
 
 const Button = styled.div`
@@ -31,6 +38,9 @@ const Button = styled.div`
   user-select: none;
   &:hover {
     background: rgba(255,255,255,0.8);
+  }
+  @media screen and (max-width: 320px) {
+    margin: 5px;
   }
 `;
 
@@ -69,21 +79,35 @@ class Game extends Component {
     this.props.moveCellAction(item, cells);
   }
 
+  componentDidMount() {
+    window.addEventListener('resize', this.updateSize.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateSize.bind(this));
+  }
+
+  updateSize() {
+    const size = window.innerWidth > 400 ? 400 : 300;
+    if (size === this.props.size) return;
+    this.props.setSizeAction(size);
+  }
+
   render() {
-    const { winner, cells, history, saved } = this.props;
+    const { winner, cells, history, saved, size } = this.props;
 
     return (
       <Wrap>
         { winner && <WinnerModal close={() => this.reset()} /> }
         <Title onClick={() => this.reset(true)}>Game 15</Title>
-        <GameBox>
+        <GameBox style={{'width': size, 'height': size}}>
           {
             cells.map((item, i) => (
               <Cell
                 key={i}
                 top={item.x}
                 left={item.y}
-                size={100}
+                size={size/4}
                 number={item.number}
                 clicked={() => this.cellClick(item)}
               />
@@ -104,6 +128,7 @@ const mapStateToProps = store => ({
   winner: store.winner,
   history: store.history,
   saved: store.saved,
+  size: store.size
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -112,6 +137,7 @@ const mapDispatchToProps = dispatch => ({
   moveBackAction: () => dispatch(moveBack()),
   saveAction: (cellsStr) => dispatch(saveCells(cellsStr)),
   restoreAction: () => dispatch(restoreCells()),
+  setSizeAction: (size) => dispatch(setSize(size)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

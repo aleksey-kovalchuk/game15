@@ -3,6 +3,7 @@ export const RESET = 'RESET';
 export const MOVE_BACK = 'MOVE_BACK';
 export const SAVE_CELLS = 'SAVE_CELLS';
 export const RESTORE_CELLS = 'RESTORE_CELLS';
+export const SET_SIZE = 'SET_SIZE';
 
 export function moveCell(item) {
   return {
@@ -36,3 +37,11 @@ export function restoreCells() {
     type: RESTORE_CELLS,
   }
 }
+
+export function setSize(size) {
+  return {
+    type: SET_SIZE,
+    payload: size
+  }
+}
+

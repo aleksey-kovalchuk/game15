@@ -1,7 +1,9 @@
 import { moveHandler, createCells, calcPositions, getCorrect } from '../utils';
-import { MOVE_CELL, RESET, MOVE_BACK, SAVE_CELLS, RESTORE_CELLS } from '../actions'
+import { MOVE_CELL, RESET, MOVE_BACK, SAVE_CELLS, RESTORE_CELLS, SET_SIZE } from '../actions'
 
-const positions = calcPositions();
+const size = window.innerWidth > 400 ? 400 : 300;
+
+const positions = calcPositions(size);
 const cells = createCells();
 const correct = getCorrect();
 cells.forEach((d, i) => Object.assign(d, positions[i]));
@@ -11,6 +13,7 @@ export const initialState = {
   winner: false,
   history: [],
   saved: null,
+  size
 };
 
 export function rootReducer(state = initialState, action) {
@@ -60,6 +63,15 @@ export function rootReducer(state = initialState, action) {
         cells: restoredCells,
         history: [],
         saved: null,
+      }
+    case SET_SIZE:
+      const resizedPositions = calcPositions(action.payload);
+      const resizedCells = state.cells.slice();
+      resizedCells.forEach((d, i) => Object.assign(d, resizedPositions[i]));
+      return {
+        ...state,
+        cells: resizedCells,
+        size: action.payload
       }
     default:
       return state

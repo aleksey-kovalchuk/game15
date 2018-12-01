@@ -13,7 +13,8 @@ const Wrap = styled.div`
 `;
 
 const Modal = styled.div`
-  width: 400px;
+  width: 466px;
+  box-sizing: border-box;
   background: #ffffff;
   border-radius: 4px;
   padding: 40px;
@@ -22,12 +23,22 @@ const Modal = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 0 20px 3px rgba(0,0,0,0.6);
+  @media screen and (max-width: 500px) {
+    width: 90%;
+    padding: 20px;
+  }
 `;
 
 const Title = styled.div`
   font-size: 36px;
   text-align: center;
   margin-bottom: 20px;
+  @media screen and (max-width: 500px) {
+    font-size: 26px;
+  }
+  @media screen and (max-width: 380px) {
+    font-size: 22px;
+  }
 `;
 
 const Text = styled.p`
