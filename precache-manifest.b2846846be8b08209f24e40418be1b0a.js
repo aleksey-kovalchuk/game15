@@ -20,12 +20,12 @@ self.__precacheManifest = [
     "url": "/game15/static/js/runtime~main.f1a4bd46.js"
   },
   {
-    "revision": "403e8e9a007d9700f935b16b9e34bd35",
-    "url": "/game15/static/media/gloria-hallelujah-latin-400.403e8e9a.woff2"
-  },
-  {
     "revision": "f0816eb570871862b69aec8a77150f27",
     "url": "/game15/static/media/gloria-hallelujah-latin-400.f0816eb5.woff"
+  },
+  {
+    "revision": "403e8e9a007d9700f935b16b9e34bd35",
+    "url": "/game15/static/media/gloria-hallelujah-latin-400.403e8e9a.woff2"
   },
   {
     "revision": "73b283909ec7e0983cfb665c2ad2ee93",
