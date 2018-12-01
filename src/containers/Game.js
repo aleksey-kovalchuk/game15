@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { moveCell, resetGame } from './actions';
-import Cell from './Cell';
+import { moveCell, resetGame } from '../actions';
+import Cell from '../components/Cell';
+import WinnerModal from '../components/WinnerModal'
 
 const Wrap = styled.div`
   display: inline-block;
+  text-align: center;
 `;
 
 const GameBox = styled.div`
@@ -41,8 +43,8 @@ const Title = styled.div`
 
 class Game extends Component {
 
-  reset() {
-    this.props.resetGameAction();
+  reset(simple) {
+    this.props.resetGameAction(simple);
   }
 
   cellClick(item) {
@@ -54,12 +56,16 @@ class Game extends Component {
   }
 
   render() {
+    const { winner, cells, correct } = this.props;
+    // this.setWinner(cells, correct);
+
     return (
       <Wrap>
-        <Title>Game 15</Title>
+        { winner && <WinnerModal close={() => this.reset()} /> }
+        <Title onClick={() => this.reset(true)}>Game 15</Title>
         <GameBox>
           {
-            this.props.cells.map((item, i) => (
+            cells.map((item, i) => (
               <Cell
                 key={i}
                 top={item.x}
@@ -72,18 +78,23 @@ class Game extends Component {
           }
         </GameBox>
         <Button onClick={() => this.reset()}>Reset</Button>
+        <Button onClick={() => this.reset()}>Save</Button>
+        <Button onClick={() => this.reset()}>Restore</Button>
+        <Button onClick={() => this.reset()}>Back</Button>
       </Wrap>
     );
   }
 }
 
 const mapStateToProps = store => ({
+  correct: store.correct,
   cells: store.cells,
+  winner: store.winner,
 });
 
 const mapDispatchToProps = dispatch => ({
   moveCellAction: (item) => dispatch(moveCell(item)),
-  resetGameAction: () => dispatch(resetGame())
+  resetGameAction: (simple) => dispatch(resetGame(simple)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

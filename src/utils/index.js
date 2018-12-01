@@ -17,7 +17,7 @@ export function moveHandler(item, cellsOrigin) {
   return cells;
 }
 
-export function createCells() {
+export function createCells(simple) {
   const cells = [];
 
   for(let i = 1; i < 17; i++) {
@@ -26,7 +26,13 @@ export function createCells() {
     });
   }
 
-  const result =  cells.sort((a,b) => Math.random() - 0.5);
+  const result = simple ? cells.slice() : cells.sort((a,b) => Math.random() - 0.5);
+
+  if (simple) {
+    result[14] = cells[15];
+    result[15] = cells[14];
+  }
+
   result.forEach((d, i) => d.order = i);
   return result;
 }
@@ -47,4 +53,8 @@ export function calcPositions() {
   }
 
   return positions;
+}
+
+export function getCorrect() {
+  return new Array(16).fill('').map((d,i) => i + 1);
 }

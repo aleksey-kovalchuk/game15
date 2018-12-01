@@ -4,12 +4,13 @@ export const RESET = 'RESET';
 export function moveCell(item) {
   return {
     type: MOVE_CELL,
-    payload: item
+    payload: item,
   }
 };
 
-export function resetGame() {
+export function resetGame(simple) {
   return {
     type: RESET,
+    payload: simple,
   }
 };
