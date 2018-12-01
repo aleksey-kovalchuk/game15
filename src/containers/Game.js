@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { moveCell, resetGame, moveBack } from '../actions';
+import { moveCell, resetGame, moveBack, saveCells, restoreCells } from '../actions';
 import Cell from '../components/Cell';
 import WinnerModal from '../components/WinnerModal'
 
@@ -51,6 +51,16 @@ class Game extends Component {
     this.props.moveBackAction();
   }
 
+  save() {
+    const { cells, saveAction } = this.props;
+    const cellsStr = JSON.stringify(cells);
+    saveAction(cellsStr);
+  }
+
+  restore() {
+    this.props.restoreAction();
+  }
+
   cellClick(item) {
     const cells = this.props.cells;
     const emptyOrder = cells.find(e => e.number === 16).order;
@@ -60,7 +70,7 @@ class Game extends Component {
   }
 
   render() {
-    const { winner, cells, history } = this.props;
+    const { winner, cells, history, saved } = this.props;
 
     return (
       <Wrap>
@@ -81,8 +91,8 @@ class Game extends Component {
           }
         </GameBox>
         <Button onClick={() => this.reset()}>Reset</Button>
-        <Button onClick={() => this.reset()}>Save</Button>
-        <Button onClick={() => this.reset()}>Restore</Button>
+        <Button onClick={() => this.save()}>Save</Button>
+        { saved ? <Button onClick={() => this.restore()}>Restore</Button> : '' }
         { history.length ? <Button onClick={() => this.back()}>Back</Button> : '' }
       </Wrap>
     );
@@ -93,12 +103,15 @@ const mapStateToProps = store => ({
   cells: store.cells,
   winner: store.winner,
   history: store.history,
+  saved: store.saved,
 });
 
 const mapDispatchToProps = dispatch => ({
   moveCellAction: (item) => dispatch(moveCell(item)),
   resetGameAction: (simple) => dispatch(resetGame(simple)),
   moveBackAction: () => dispatch(moveBack()),
+  saveAction: (cellsStr) => dispatch(saveCells(cellsStr)),
+  restoreAction: () => dispatch(restoreCells()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

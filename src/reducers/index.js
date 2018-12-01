@@ -1,5 +1,5 @@
 import { moveHandler, createCells, calcPositions, getCorrect } from '../utils';
-import { MOVE_CELL, RESET, MOVE_BACK } from '../actions'
+import { MOVE_CELL, RESET, MOVE_BACK, SAVE_CELLS, RESTORE_CELLS } from '../actions'
 
 const positions = calcPositions();
 const cells = createCells();
@@ -10,6 +10,7 @@ export const initialState = {
   cells,
   winner: false,
   history: [],
+  saved: null,
 };
 
 export function rootReducer(state = initialState, action) {
@@ -36,6 +37,7 @@ export function rootReducer(state = initialState, action) {
         ...state,
         cells: reset,
         winner: false,
+        history: [],
       }
     case MOVE_BACK:
       const prevCells = state.history[state.history.length - 1];
@@ -45,6 +47,19 @@ export function rootReducer(state = initialState, action) {
         ...state,
         cells: JSON.parse(prevCells),
         history: cropHistory,
+      }
+    case SAVE_CELLS:
+      return {
+        ...state,
+        saved: action.payload,
+      }
+    case RESTORE_CELLS:
+      const restoredCells = JSON.parse(state.saved);
+      return {
+        ...state,
+        cells: restoredCells,
+        history: [],
+        saved: null,
       }
     default:
       return state

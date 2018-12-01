@@ -14,6 +14,7 @@ const Cell = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  user-select: none;
   &:hover {
     background: rgba(255,255,255,0.9);
   }
