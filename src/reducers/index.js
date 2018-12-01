@@ -1,5 +1,5 @@
-import {moveHandler, createCells, calcPositions, getCorrect} from '../utils';
-import {MOVE_CELL, RESET, MOVE_BACK, SAVE_CELLS, RESTORE_CELLS, SET_SIZE} from '../actions'
+import { moveHandler, createCells, calcPositions, getCorrect } from '../utils';
+import { MOVE_CELL, RESET, MOVE_BACK, SAVE_CELLS, RESTORE_CELLS, SET_SIZE } from '../actions'
 
 const size = window.innerWidth > 400 ? 400 : 300;
 

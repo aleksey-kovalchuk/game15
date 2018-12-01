@@ -10,7 +10,7 @@ import {
   setSize,
 } from '../actions';
 import Cell from '../components/Cell';
-import WinnerModal from '../components/WinnerModal'
+import WinnerModal from '../components/WinnerModal';
 
 const Wrap = styled.div`
   display: inline-block;
@@ -126,7 +126,7 @@ const mapStateToProps = store => ({
   winner: store.winner,
   history: store.history,
   saved: store.saved,
-  size: store.size
+  size: store.size,
 });
 
 const mapDispatchToProps = dispatch => ({

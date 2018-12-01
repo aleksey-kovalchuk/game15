@@ -17,7 +17,7 @@ export function calcPositions(size) {
 
 export function moveHandler(item, cellsOrigin) {
   const cells = cellsOrigin.slice();
-  const currentCell = {...item};
+  const currentCell = { ...item };
 
   const cellIndex = cells.findIndex(d => d.number === currentCell.number);
   const emptyIndex = cells.findIndex(d => d.number === 16);
