@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { moveCell, resetGame } from '../actions';
+import { moveCell, resetGame, moveBack } from '../actions';
 import Cell from '../components/Cell';
 import WinnerModal from '../components/WinnerModal'
 
@@ -47,17 +47,20 @@ class Game extends Component {
     this.props.resetGameAction(simple);
   }
 
+  back() {
+    this.props.moveBackAction();
+  }
+
   cellClick(item) {
     const cells = this.props.cells;
     const emptyOrder = cells.find(e => e.number === 16).order;
     const allows = [emptyOrder - 1, emptyOrder + 1, emptyOrder - 4, emptyOrder + 4];
     if (allows.indexOf(item.order) === -1) return false;
-    this.props.moveCellAction(item);
+    this.props.moveCellAction(item, cells);
   }
 
   render() {
-    const { winner, cells, correct } = this.props;
-    // this.setWinner(cells, correct);
+    const { winner, cells, history } = this.props;
 
     return (
       <Wrap>
@@ -80,21 +83,22 @@ class Game extends Component {
         <Button onClick={() => this.reset()}>Reset</Button>
         <Button onClick={() => this.reset()}>Save</Button>
         <Button onClick={() => this.reset()}>Restore</Button>
-        <Button onClick={() => this.reset()}>Back</Button>
+        { history.length ? <Button onClick={() => this.back()}>Back</Button> : '' }
       </Wrap>
     );
   }
 }
 
 const mapStateToProps = store => ({
-  correct: store.correct,
   cells: store.cells,
   winner: store.winner,
+  history: store.history,
 });
 
 const mapDispatchToProps = dispatch => ({
   moveCellAction: (item) => dispatch(moveCell(item)),
   resetGameAction: (simple) => dispatch(resetGame(simple)),
+  moveBackAction: () => dispatch(moveBack()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
