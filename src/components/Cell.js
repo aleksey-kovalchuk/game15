@@ -28,7 +28,11 @@ const CellComponent = (props) => {
           <Cell
             onClick={props.clicked}
             className={props.number === 16 ? 'dark' : ''}
-            style={{ 'top': props.top, 'left': props.left, 'width': props.size + 'px', 'height': props.size + 'px' }}
+            style={{
+              'top': props.top, 'left': props.left,
+              'width': props.size + 'px',
+              'height': props.size + 'px'
+            }}
           >
             { props.number }
           </Cell>

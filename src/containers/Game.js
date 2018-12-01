@@ -7,7 +7,7 @@ import {
   moveBack,
   saveCells,
   restoreCells,
-  setSize
+  setSize,
 } from '../actions';
 import Cell from '../components/Cell';
 import WinnerModal from '../components/WinnerModal'
@@ -52,7 +52,6 @@ const Title = styled.div`
 
 
 class Game extends Component {
-
   reset(simple) {
     this.props.resetGameAction(simple);
   }
@@ -89,8 +88,7 @@ class Game extends Component {
 
   updateSize() {
     const size = window.innerWidth > 400 ? 400 : 300;
-    if (size === this.props.size) return;
-    this.props.setSizeAction(size);
+    if (size !== this.props.size) this.props.setSizeAction(size);
   }
 
   render() {

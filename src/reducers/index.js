@@ -1,5 +1,5 @@
-import { moveHandler, createCells, calcPositions, getCorrect } from '../utils';
-import { MOVE_CELL, RESET, MOVE_BACK, SAVE_CELLS, RESTORE_CELLS, SET_SIZE } from '../actions'
+import {moveHandler, createCells, calcPositions, getCorrect} from '../utils';
+import {MOVE_CELL, RESET, MOVE_BACK, SAVE_CELLS, RESTORE_CELLS, SET_SIZE} from '../actions'
 
 const size = window.innerWidth > 400 ? 400 : 300;
 
@@ -26,7 +26,7 @@ export function rootReducer(state = initialState, action) {
       newHistory.push(prev);
 
       const newCells = moveHandler(action.payload, state.cells);
-      const test = state.cells.slice().sort((a,b) => a.order - b.order).map(d => d.number);
+      const test = state.cells.slice().sort((a, b) => a.order - b.order).map(d => d.number);
       return {
         ...state,
         cells: newCells,
@@ -34,8 +34,9 @@ export function rootReducer(state = initialState, action) {
         history: newHistory,
       }
     case RESET:
+      const resetPositions = calcPositions(state.size);
       const reset = createCells(action.payload);
-      reset.forEach((d, i) => Object.assign(d, positions[i]));
+      reset.forEach((d, i) => Object.assign(d, resetPositions[i]));
       return {
         ...state,
         cells: reset,

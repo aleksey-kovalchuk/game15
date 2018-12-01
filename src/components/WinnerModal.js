@@ -73,7 +73,7 @@ const WinnerModal = (props) => {
 }
 
 WinnerModal.propTypes = {
-  close: PropTypes.func
+  close: PropTypes.func,
 };
 
 export default WinnerModal;
