@@ -42,6 +42,7 @@ export function rootReducer(state = initialState, action) {
         cells: reset,
         winner: false,
         history: [],
+        saved: null,
       }
     case MOVE_BACK:
       const prevCells = state.history[state.history.length - 1];
@@ -66,13 +67,15 @@ export function rootReducer(state = initialState, action) {
         saved: null,
       }
     case SET_SIZE:
-      const resizedPositions = calcPositions(action.payload);
-      const resizedCells = state.cells.slice();
-      resizedCells.forEach((d, i) => Object.assign(d, resizedPositions[i]));
+      const setSizePositions = calcPositions(action.payload);
+      const setSizeCells = createCells();
+      setSizeCells.forEach((d, i) => Object.assign(d, setSizePositions[i]));
       return {
         ...state,
-        cells: resizedCells,
-        size: action.payload
+        cells: setSizeCells,
+        size: action.payload,
+        history: [],
+        saved: null,
       }
     default:
       return state
